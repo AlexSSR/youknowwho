@@ -1,4 +1,4 @@
-package org.beans;
+package com.t9d.tech.org.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

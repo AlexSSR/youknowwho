@@ -1,6 +1,6 @@
-package org.web.global;
+package com.t9d.tech.org.web.global;
 
-import org.beans.GlobalResponse;
+import com.t9d.tech.org.beans.GlobalResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

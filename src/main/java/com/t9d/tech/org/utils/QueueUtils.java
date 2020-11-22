@@ -1,15 +1,21 @@
-package org.utils;
+package com.t9d.tech.org.utils;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.util.PriorityQueue;
 
+@Component
 public class QueueUtils {
 
+
     @Data
-    private static class User implements Comparable<User> {
+    public static class User implements Comparable<User> {
         private String name;
         private Integer priority;
+        private int mins;
+        private int x;
+        private int y;
 
         @Override
         public int compareTo(User o) {
@@ -19,22 +25,45 @@ public class QueueUtils {
 
     private static PriorityQueue<User> queue = new PriorityQueue<User>();
 
+    public static boolean hashNext() {
+        return queue.size() > 0;
+    }
+
     public static User getUser(String name, Integer priority) {
         User user = new User();
         user.setName(name);
         user.setPriority(priority);
+
         return user;
     }
 
-    public static User outOffQueue() {
+    public  User getUser(String name, Integer priority, int mins) {
+        User user = new User();
+        user.setName(name);
+        user.setPriority(priority);
+        user.setMins(mins);
+        return user;
+    }
+
+    public  User getUser(String name, Integer priority, int mins, int x, int y) {
+        User user = new User();
+        user.setName(name);
+        user.setPriority(priority);
+        user.setMins(mins);
+        user.setX(x);
+        user.setY(y);
+        return user;
+    }
+
+    public  User outOffQueue() {
         return queue.poll();
     }
 
-    public static boolean goToQueue(User u) {
+    public  boolean goToQueue(User u) {
         return queue.offer(u);
     }
 
-    public static void main(String[] args) {
+    public  void main(String[] args) {
 
         User user_133 = getUser("133", 5);
         User user_t9d = getUser("t9d", 1);

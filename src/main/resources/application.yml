@@ -1,8 +1,8 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.16.153.132:3306/dplus_metadata?useSSL=false&useUnicode=true&characterEncoding=utf8
-    username: dplus
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sparkPractice?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
     password: 123456
   http:
     encoding:
@@ -18,3 +18,71 @@ server:
     min-response-size: 2048
     max-http-header-size: 10000000
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+
+monitor:
+  leftUpPoint:
+    X: 6
+    Y: 68
+    R: 95
+    G: 91
+    B: 130
+  leftDownPoint:
+    X: 6
+    Y: 599
+    R: 43
+    G: 51
+    B: 22
+  rightUpPoint:
+    X: 946
+    Y: 78
+    R: 0
+    G: 95
+    B: 0
+  rightDownPoint:
+    X: 958
+    Y: 602
+    R: 31
+    G: 35
+    B: 39
+  mapButton:
+    X: 43
+    Y: 551
+    R: 0
+    G: 68
+    B: 124
+  searchButton:
+    X: 256
+    Y: 78
+    R: 72
+    G: 72
+    B: 25
+  xInput:
+    X: 444
+    Y: 162
+    R: 49
+    G: 58
+    B: 28
+  yInput:
+    X: 606
+    Y: 166
+    R: 49
+    G: 58
+    B: 28
+  searchConformButton:
+    X: 664
+    Y: 167
+    R: 0
+    G: 163
+    B: 235
+
+
+
+
+
+
+
+
+
+
+
