@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -21,11 +23,12 @@ public class DatabaseUtils {
     private static HashMap<String, AtomicInteger> metaBase = new HashMap<>();
 
     private static HashMap<String, ComUser> comUserDatabase = new HashMap<String, ComUser>(){{
-        put("t9d",new ComUser("t9d","246810",1,16));
+        put("t9d",new ComUser("t9d","246810",2,3));
     }};
 
     static {
-        comUserDatabase.put("yg",new ComUser("yg","1357911",2,6));
+        comUserDatabase.put("yg",new ComUser("yg","1357911",3,6));
+        metaBase.put("t9d",new AtomicInteger());
     }
 
     public static void addComUser(String name,String passWord,int proority,int queueSize){
@@ -46,14 +49,16 @@ public class DatabaseUtils {
 
             logger.error(e.getMessage());
         }
-
         return false;
     }
 
-    public int inQueue(ComerDetails details){
-
-
+    public HashMap<Integer, List<QueueUtils.User>> inQueue(ComerDetails details){
+        //2 无资格操作
+        //1 队列已经满了
+        //0 加入队列成功
+        HashMap<Integer, List<QueueUtils.User>> res = new HashMap<>();
         String key = details.getCommunity();
+        LinkedList<QueueUtils.User> usersList = new LinkedList<>();
 
         try {
 
@@ -74,10 +79,18 @@ public class DatabaseUtils {
                         boolean b = queueUtils.goToQueue(user);
 
                         if (b) {
-                            return 0;
+                            atomicInteger.getAndAdd(1);
+                            res.put(0,usersList);
+                            return res;
                         }
 
-                        return 2;
+                         usersList = queueUtils.search(key);
+
+                        res.put(1,usersList);
+                        return res;
+                    }else {
+                        res.put(1,usersList);
+                        return res;
                     }
                 }
             }
@@ -85,9 +98,7 @@ public class DatabaseUtils {
         catch (NullPointerException e){
             logger.error(e.getMessage());
         }
-        //1 无资格操作
-        //2 队列已经满了
-        //0 加入队列成功
-        return 1;
+        res.put(2,usersList);
+        return  res;
     }
 }

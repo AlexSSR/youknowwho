@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping(value = "/alchemy")
-public class AlchemyDataController {
+public class TestController {
 
     @Autowired
     private RobotUtils robotUtils;
@@ -39,7 +39,7 @@ public class AlchemyDataController {
     private static final String QUERY_SQL = "";
 
 
-    private static Logger logger = LoggerFactory.getLogger(AlchemyDataController.class);
+    private static Logger logger = LoggerFactory.getLogger(TestController.class);
 
     private static AtomicLong add = new AtomicLong();
 

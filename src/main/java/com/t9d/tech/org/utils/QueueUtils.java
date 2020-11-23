@@ -3,11 +3,24 @@ package com.t9d.tech.org.utils;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 @Component
 public class QueueUtils {
 
+
+    public LinkedList<User> search(String key) {
+
+        LinkedList<User> list = new LinkedList<>();
+
+        queue.forEach(ele -> {
+            if (ele.getName().equals(key)) {
+                list.add(ele);
+            }
+        });
+        return list;
+    }
 
     @Data
     public static class User implements Comparable<User> {
