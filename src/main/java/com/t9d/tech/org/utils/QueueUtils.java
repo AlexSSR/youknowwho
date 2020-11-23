@@ -45,7 +45,7 @@ public class QueueUtils {
         return user;
     }
 
-    public  User getUser(String name, Integer priority, int mins, int x, int y) {
+    public User getUser(String name, Integer priority, int mins, int x, int y) {
         User user = new User();
         user.setName(name);
         user.setPriority(priority);
