@@ -58,10 +58,10 @@ public class QueueController {
             HashMap<Integer, List<QueueUtils.User>> res = databaseUtils.inQueue(req);
 
             if (res.containsKey(0)) {
-                if (res.containsKey(1)) {
 
-                    return new GlobalResponse<>("申请成功");
-                }
+                return new GlobalResponse<>("申请成功");
+            }
+            if (res.containsKey(1)) {
 
                 return new GlobalResponse<>("队列已经满员");
             }
