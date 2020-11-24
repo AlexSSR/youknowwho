@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -51,23 +52,36 @@ public class QueueController {
     private static AtomicLong add = new AtomicLong();
 
     @PostMapping(value = "/xxoo")
-    public GlobalResponse<String> request(@RequestBody ComerDetails req)  {
+    public GlobalResponse<String> request(@RequestBody ComerDetails req) {
 
-        if (databaseUtils.isCorrectPW(req.getCommunity(),req.getPassWord())) {
+        if (databaseUtils.isCorrectPW(req.getCommunity(), req.getPassWord())) {
             HashMap<Integer, List<QueueUtils.User>> res = databaseUtils.inQueue(req);
 
-            if (res.containsKey(0)) {            if (res.containsKey(1)){
+            if (res.containsKey(0)) {
+                if (res.containsKey(1)) {
 
-                return new GlobalResponse<>("申请成功");
-            }
+                    return new GlobalResponse<>("申请成功");
+                }
 
                 return new GlobalResponse<>("队列已经满员");
             }
 
             return new GlobalResponse<>("权限问题，请联系管理员");
-        }else {
+        } else {
             return new GlobalResponse<>("无权限进行相关操作");
         }
+    }
 
+    @PostMapping(value = "/search")
+    public GlobalResponse<List<QueueUtils.User>> search(@RequestBody ComerDetails req) {
+
+        if (databaseUtils.isCorrectPW(req.getCommunity(), req.getPassWord())) {
+
+            List<QueueUtils.User> users = queueUtils.getAllUsers();
+            return new GlobalResponse<>(users);
+        } else {
+            AccessControlException accessControlException = new AccessControlException("无权限进行相关操作");
+            throw accessControlException;
+        }
     }
 }
